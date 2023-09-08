@@ -27,9 +27,9 @@ variable "android_sdk_tools_version" {
 source "tart-cli" "tart" {
   vm_base_name = "${var.macos_version}-base"
   vm_name      = "${var.macos_version}-xcode:${var.xcode_version}"
-  cpu_count    = 4
+  cpu_count    = 8
   memory_gb    = 8
-  disk_size_gb = 90
+  disk_size_gb = 80
   headless     = true
   ssh_password = "admin"
   ssh_username = "admin"
@@ -101,33 +101,17 @@ build {
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
-      "echo 'export FLUTTER_HOME=$HOME/flutter' >> ~/.zprofile",
-      "echo 'export PATH=$HOME/flutter:$HOME/flutter/bin/:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH' >> ~/.zprofile",
-      "source ~/.zprofile",
-      "git clone https://github.com/flutter/flutter.git $FLUTTER_HOME",
-      "cd $FLUTTER_HOME",
-      "git checkout stable",
-      "flutter doctor --android-licenses",
-      "flutter doctor",
-      "flutter precache",
-    ]
-  }
-  provisioner "shell" {
-    inline = [
-      "source ~/.zprofile",
-      "brew install libimobiledevice ideviceinstaller ios-deploy fastlane carthage",
+      "brew install fastlane",
       "sudo gem update",
       "sudo gem install cocoapods",
       "sudo gem uninstall --ignore-dependencies ffi && sudo gem install ffi -- --enable-libffi-alloc"
     ]
   }
-
-  # useful utils for mobile development
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
-      "brew install graphicsmagick imagemagick",
-      "brew install wix/brew/applesimutils"
+      "brew install watchman",
+      "npm install -g firebase-tools"
     ]
   }
 
@@ -144,13 +128,6 @@ build {
       "sudo add-certificate AppleWWDRCAG3.cer",
       "sudo add-certificate DeveloperIDG2CA.cer",
       "rm add-certificate* *.cer"
-    ]
-  }
-
-  provisioner "shell" {
-    inline = [
-      "source ~/.zprofile",
-      "flutter doctor"
     ]
   }
 }
