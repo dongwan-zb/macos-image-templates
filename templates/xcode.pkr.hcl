@@ -111,7 +111,10 @@ build {
     inline = [
       "source ~/.zprofile",
       "brew install watchman",
-      "npm install -g firebase-tools"
+      "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash",
+      "source ~/.zprofile",
+      "nvm install 16",
+      "npm install -g yarn firebase-tools"
     ]
   }
 
