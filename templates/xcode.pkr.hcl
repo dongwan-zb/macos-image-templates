@@ -39,25 +39,13 @@ source "tart-cli" "tart" {
 build {
   sources = ["source.tart-cli.tart"]
 
-  // re-install the actions runner
-  provisioner "shell" {
-    inline = [
-      "cd $HOME",
-      "rm -rf actions-runner",
-      "mkdir actions-runner && cd actions-runner",
-      "curl -O -L https://github.com/actions/runner/releases/download/v${var.gha_version}/actions-runner-osx-arm64-${var.gha_version}.tar.gz",
-      "tar xzf ./actions-runner-osx-arm64-${var.gha_version}.tar.gz",
-      "rm actions-runner-osx-arm64-${var.gha_version}.tar.gz",
-    ]
-  }
-
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
       "brew --version",
       "brew update",
       "brew upgrade",
-      "brew install curl wget unzip zip ca-certificates",
+      "brew install curl wget unzip zip ca-certificates watchman",
       "sudo softwareupdate --install-rosetta --agree-to-license"
     ]
   }
@@ -110,14 +98,16 @@ build {
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
-      "brew install watchman",
       "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash",
+    ]
+  }
+  provisioner "shell" {
+    inline = [
       "source ~/.zprofile",
       "nvm install 16",
       "npm install -g yarn firebase-tools"
     ]
   }
-
   # inspired by https://github.com/actions/runner-images/blob/fb3b6fd69957772c1596848e2daaec69eabca1bb/images/macos/provision/configuration/configure-machine.sh#L33-L61
   provisioner "shell" {
     inline = [
