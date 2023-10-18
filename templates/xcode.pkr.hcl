@@ -45,7 +45,7 @@ build {
       "brew --version",
       "brew update",
       "brew upgrade",
-      "brew install curl wget unzip zip ca-certificates watchman",
+      "brew install curl wget unzip zip ca-certificates watchman awscli",
       "sudo softwareupdate --install-rosetta --agree-to-license"
     ]
   }
