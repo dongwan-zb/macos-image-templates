@@ -53,6 +53,16 @@ build {
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
+      "rbenv install 2.7.8", // latest 2.x.x before EOL
+      "rbenv install $(rbenv install -l | grep -v - | tail -1)",
+      "rbenv global $(rbenv install -l | grep -v - | tail -1)",
+      "gem install bundler"
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "source ~/.zprofile",
       "brew install homebrew/cask-versions/temurin17",
       "echo 'export ANDROID_HOME=$HOME/android-sdk' >> ~/.zprofile",
       "echo 'export ANDROID_SDK_ROOT=$ANDROID_HOME' >> ~/.zprofile",
