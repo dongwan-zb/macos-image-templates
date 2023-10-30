@@ -108,13 +108,11 @@ build {
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
-      "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash",
-    ]
-  }
-  provisioner "shell" {
-    inline = [
+      "curl https://get.volta.sh | bash",
+      "echo 'export VOLTA_HOME=$HOME/.volta' >> ~/.zprofile",
+      "echo 'export PATH=$PATH:$VOLTA_HOME/bin' >> ~/.zprofile",
       "source ~/.zprofile",
-      "nvm install 16",
+      "volta install node@16",
       "npm install -g yarn firebase-tools"
     ]
   }
