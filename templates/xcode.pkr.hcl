@@ -112,7 +112,7 @@ build {
       "echo 'export VOLTA_HOME=$HOME/.volta' >> ~/.zprofile",
       "echo 'export PATH=$PATH:$VOLTA_HOME/bin' >> ~/.zprofile",
       "source ~/.zprofile",
-      "volta install node@16",
+      "volta install node@18",
       "npm install -g yarn firebase-tools"
     ]
   }
