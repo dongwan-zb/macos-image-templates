@@ -113,7 +113,7 @@ build {
       "echo 'export PATH=$PATH:$VOLTA_HOME/bin' >> ~/.zprofile",
       "source ~/.zprofile",
       "volta install node@18",
-      "npm install -g yarn firebase-tools"
+      "npm install -g yarn@1 firebase-tools"
     ]
   }
   # inspired by https://github.com/actions/runner-images/blob/fb3b6fd69957772c1596848e2daaec69eabca1bb/images/macos/provision/configuration/configure-machine.sh#L33-L61
