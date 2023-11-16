@@ -53,9 +53,6 @@ build {
   provisioner "shell" {
     inline = [
       "source ~/.zprofile",
-      "rbenv install 2.7.8", // latest 2.x.x before EOL
-      "rbenv install $(rbenv install -l | grep -v - | tail -1)",
-      "rbenv global $(rbenv install -l | grep -v - | tail -1)",
       "gem install bundler"
     ]
   }
@@ -112,7 +109,7 @@ build {
       "echo 'export VOLTA_HOME=$HOME/.volta' >> ~/.zprofile",
       "echo 'export PATH=$PATH:$VOLTA_HOME/bin' >> ~/.zprofile",
       "source ~/.zprofile",
-      "volta install node@18",
+      "volta install node@16",
       "npm install -g yarn@1 firebase-tools"
     ]
   }
